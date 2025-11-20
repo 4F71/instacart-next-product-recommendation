@@ -1,0 +1,43 @@
+# Core Data Science
+pandas==2.2.0
+numpy==1.26.0
+scikit-learn==1.4.0
+
+# Gradient Boosting (sonra ekleyeceğiz, şimdilik yorum satırı)
+# xgboost==2.0.3
+# lightgbm==4.3.0
+# catboost==1.2.2
+
+# Hyperparameter Optimization (sonra)
+# optuna==3.5.0
+
+# Model Interpretability (sonra)
+# shap==0.44.1
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.1
+plotly==5.18.0
+
+# Jupyter
+jupyterlab==4.0.11
+ipykernel==6.29.2
+notebook==7.0.7
+
+# API & Deployment (sonra)
+# fastapi==0.109.0
+# uvicorn[standard]==0.27.0
+# streamlit==1.30.0
+# pydantic==2.5.3
+
+# Database (sonra)
+# sqlalchemy==2.0.25
+
+# Utilities
+python-dotenv==1.0.0
+joblib==1.3.2
+tqdm==4.66.1
+
+# Testing (optional)
+pytest==7.4.4
+pytest-cov==4.1.0
