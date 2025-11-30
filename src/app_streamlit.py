@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import json
+import os
 
 # Sayfa Ayarları
 st.set_page_config(
@@ -10,7 +11,7 @@ st.set_page_config(
 )
 
 # API Adresi
-API_URL = "http://127.0.0.1:8000"
+API_URL = "http://localhost:8000"
 
 
 st.title("Instacart Yeniden Sipariş Tahmin Uygulaması")
