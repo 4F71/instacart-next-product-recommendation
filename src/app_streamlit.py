@@ -2,24 +2,19 @@ import streamlit as st
 import requests
 import pandas as pd
 import json
-import os
 
-# Sayfa Ayarları
 st.set_page_config(
     page_title="Instacart Reorder Prediction",
     layout="wide"
 )
 
-# API Adresi
-API_URL = "http://localhost:8000"
-
+API_URL = "http://127.0.0.1:8000"
 
 st.title("Instacart Yeniden Sipariş Tahmin Uygulaması")
 st.markdown("""
 Bu arayüz, belirli bir **kullanıcı–ürün çifti** için bir sonraki siparişte bu ürünün yeniden alınma olasılığını tahmin eder.
 Model çıktısı, arka planda çalışan **LightGBM** algoritması ve optimize edilmiş eşik değerine (Threshold) dayanmaktadır.
 """)
-
 
 with st.expander("Model çıktısı ve Karar Mekanizması hakkında bilgi"):
     st.markdown("""
@@ -31,11 +26,9 @@ with st.expander("Model çıktısı ve Karar Mekanizması hakkında bilgi"):
 
 st.markdown("---")
 
-# --- Sidebar ---
 st.sidebar.header("Girdi Yöntemi")
 mode = st.sidebar.radio("Seçiniz:", ["Manuel Giriş", "Kullanıcı Seçimi (Demo)"])
 
-# --- Yardımcı Fonksiyonlar ---
 def get_prediction(features):
     try:
         resp = requests.post(f"{API_URL}/predict", json={"features": features})
@@ -48,17 +41,15 @@ def get_prediction(features):
         st.error(f"Bağlantı Hatası: {e}")
         return None
 
-def display_decision_analysis(probability, threshold, label):
+def display_decision_analysis(probability, threshold, is_reorder):
     """Karar analizi, görsel düzeltmeler ve iş yorumu"""
     margin = probability - threshold
     
-    st.subheader(" Model Karar Analizi")
+    st.subheader("Model Karar Analizi")
     
-    # Metrikler 
     col1, col2, col3 = st.columns(3)
     col1.metric("Modelin Verdiği Olasılık", f"%{probability*100:.1f}")
     col2.metric("Karar Eşiği (Threshold)", f"{threshold:.2f}")
-    
     
     if margin > 0:
         col3.metric("Güven Marjı", f"+{margin:.2f}", delta_color="normal")
@@ -66,10 +57,8 @@ def display_decision_analysis(probability, threshold, label):
         col3.metric("Güven Marjı", f"{margin:.2f}", delta_color="inverse")
     
     st.markdown("---")
-
     
-    if label == 1:
-        # Pozitif Tahmin
+    if is_reorder == 1:
         confidence = "YÜKSEK" if probability > 0.70 else "ORTA"
         
         st.success(f"### Tahmin: Ürün Sepete Eklenecek ({confidence} Güven)")
@@ -87,7 +76,6 @@ def display_decision_analysis(probability, threshold, label):
         """)
         
     else:
-        # Negatif Tahmin
         st.error(f"### Tahmin: Ürün Sepete Eklenmeyecek")
         
         st.warning(f"""
@@ -114,7 +102,6 @@ if mode == "Kullanıcı Seçimi (Demo)":
                 selected_user = st.selectbox("Analiz Edilecek Kullanıcı ID:", users)
                 
                 if st.button("Kullanıcı Verilerini Getir ve Tahmin Et"):
-                    # Veri Çekme
                     data_resp = requests.get(f"{API_URL}/get_user_data/{selected_user}")
                     
                     if data_resp.status_code == 200:
@@ -122,25 +109,21 @@ if mode == "Kullanıcı Seçimi (Demo)":
                         features = data['features']
                         product_id = data.get('product_id', 'Bilinmiyor')
                         
-                        # Veri Görselleştirme
                         st.write(f"**İncelenen Ürün ID:** `{product_id}`")
                         
                         c1, c2 = st.columns(2)
                         with c1:
                             st.markdown("### Müşteri Profili")
-                            
                             user_feats = {k:v for k,v in features.items() if k.startswith('user')}
                             st.dataframe(pd.DataFrame([user_feats]).T.rename(columns={0:'Değer'}), height=300)
                             
                         with c2:
                             st.markdown("### Ürün & Kategori Metrikleri")
-                            
                             prod_feats = {k:v for k,v in features.items() if not k.startswith('user')}
                             st.dataframe(pd.DataFrame([prod_feats]).T.rename(columns={0:'Değer'}), height=300)
                         
                         st.markdown("---")
                         
-                        # Tahmin İsteği
                         result = get_prediction(features)
                         if result:
                             display_decision_analysis(
@@ -157,7 +140,6 @@ if mode == "Kullanıcı Seçimi (Demo)":
         st.error(f"Sistem Hatası: {e}")
 
 
-# --- MOD 2: Manuel Giriş ---
 elif mode == "Manuel Giriş":
     st.subheader("Parametre Simülasyonu")
     st.markdown("Bu modda, özellik değerlerini manuel olarak değiştirerek modelin hassasiyetini test edebilirsiniz.")
@@ -206,5 +188,5 @@ elif mode == "Manuel Giriş":
             display_decision_analysis(
                 result['probability'], 
                 result['threshold'], 
-                result['is_reorder']
+                result['is_reorder'] 
             )

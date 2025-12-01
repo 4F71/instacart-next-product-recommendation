@@ -24,3 +24,7 @@ python-dotenv==1.0.0
 joblib==1.3.2
 tqdm==4.66.1
 lightgbm
+
+SQLAlchemy
+plotly
+python-dotenv
