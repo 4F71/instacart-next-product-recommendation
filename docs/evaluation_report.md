@@ -9,7 +9,7 @@
 
 Training aşamasında **Data Leakage** (Veri Sızıntısı) problemini çözdükten sonra eğittiğim final LightGBM modeli, hiç görmediği kullanıcılardan oluşan validasyon setinde test edildi.
 
-Standart 0.50 eşik değeri yerine, F1 skorunu maksimize eden **0.40 Eşik Değeri (Threshold)** ile yapılan testlerde **0.7779 F1 Skoru** elde edildi. [cite_start]Bu skor, Baseline modeline (Lojistik Regresyon - 0.7452) kıyasla **%4.4'lük net bir performans artışı** [cite: 58] anlamına geliyor.
+Standart 0.50 eşik değeri yerine, F1 skorunu maksimize eden **0.40 Eşik Değeri (Threshold)** ile yapılan testlerde **0.7779 F1 Skoru** elde edildi. Bu skor, Baseline modeline (Lojistik Regresyon - 0.7452) kıyasla **%4.4'lük net bir performans artışı**  anlamına geliyor.
 
 ---
 
@@ -50,11 +50,11 @@ Modeli "Kara Kutu" olmaktan çıkarmak için **SHAP (SHapley Additive exPlanatio
 
 2.  **Kullanıcı Karakteristiği (`user_exploration_score`):**
     * *Etki:* Negatif korelasyon.
-    * *Yorum:* Model, sürekli yeni ürün deneyen ("Kaşif") kullanıcıları tespit edip, onlara daha az "Reorder" önerisi yapıyor. [cite_start]Kullanıcı psikolojisini analiz edebiliyor[cite: 153].
+    * *Yorum:* Model, sürekli yeni ürün deneyen ("Kaşif") kullanıcıları tespit edip, onlara daha az "Reorder" önerisi yapıyor. Kullanıcı psikolojisini analiz edebiliyor.
 
 3.  **Kullanıcı Sadakati (`user_reorder_ratio`):**
     * *Etki:* Pozitif.
-    * [cite_start]*Yorum:* Geçmişte sadık olan kullanıcıların gelecekte de sadık olacağı varsayımı model tarafından doğrulanmıştır[cite: 116].
+    * *Yorum:* Geçmişte sadık olan kullanıcıların gelecekte de sadık olacağı varsayımı model tarafından doğrulanmıştır.
 
 ---
 
