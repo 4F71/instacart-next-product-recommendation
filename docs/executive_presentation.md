@@ -155,10 +155,10 @@ Müşteri alışveriş alışkanlıklarını öğrenerek gelecekteki satın alma
 
 ### Soru 8: Sistem nasıl izleniyor ve kontrol ediliyor?
 
-![Monitoring Dashboard Overview](../figures/monitoring_dashboard_overview.png)  
+![Monitoring Dashboard Overview](../figures/monitoring/monitoring_dashboard_overview.png)  
 *Rapor Görseli 10: Canlı İzleme Paneli*
 
-![Monitoring Dashboard Details](../figures/monitoring_dashboard_details.png)  
+![Monitoring Dashboard Details](../figures/monitoring/monitoring_dashboard_details.png)  
 *Rapor Görseli 11: Detaylı Tahmin Takibi*
 
 **İzleme Kapsamı:**
