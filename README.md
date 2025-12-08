@@ -180,6 +180,7 @@ docker run -p 7860:7860 instacart-app
 ```
 
 10. Repo Yapısı
+```
 proje/
 ├── notebooks/
 │   ├── 01_eda.ipynb
@@ -233,25 +234,27 @@ proje/
 ├── monitoring/
 │   ├── dashboard.py
 │   └── predictions.db
-
+|   └── log.py
+| 
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
+```
 
 11. Raporlar
 
 Tüm teknik raporlar docs/ klasöründedir:
 
-problem_definition.md  
-eda_report.md  
-feature_engineering_report.md  
-baseline_report.md  
-training_report.md  
-evaluation_report.md  
-deployment_report.md  
-final_report.md  
-model_card.md  
-executive_presentation.md  
+`problem_definition.md`  
+`eda_report.md`  
+`feature_engineering_report.md`  
+`baseline_report.md`  
+`training_report.md`  
+`evaluation_report.md`  
+`deployment_report.md`  
+`final_report.md`  
+`model_card.md`  
+`executive_presentation.md`
 
 12. Medium Yazısı
 
@@ -261,11 +264,11 @@ https://medium.com/@yedisarman/32-milyon-satırlık-veri-junior-ml-developer-b97
 
 13. İletişim
 
-Geliştirici: Onur Tilki (4F71)  
-GitHub: https://github.com/4F71
-HF: https://huggingface.co/4F71
-Linkedin: www.linkedin.com/in/onurtilki
-E-posta: [mehmetonurt@gmail.com]
+- Geliştirici: Onur Tilki (4F71)  
+- GitHub: https://github.com/4F71
+- HF: https://huggingface.co/4F71
+- Linkedin: www.linkedin.com/in/onurtilki
+- E-posta: [mehmetonurt@gmail.com]
 
 14. Sonuç
 
